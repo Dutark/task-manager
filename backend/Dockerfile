@@ -1,5 +1,4 @@
-# Backend Dockerfile - Python + FastAPI
-FROM python:3.12
+FROM python:3.15-rc-alpine3.22
 
 # Créer un utilisateur non root
 RUN useradd -m appuser
