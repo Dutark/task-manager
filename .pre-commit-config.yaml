@@ -1,5 +1,3 @@
-# See https://pre-commit.com for more information
-# See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
@@ -13,16 +11,36 @@ repos:
     rev: 23.12.1
     hooks:
       - id: black
+        files: backend/
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.1.0
     hooks:
       - id: flake8
+        files: backend/
 
   - repo: local
     hooks:
       - id: pytest-backend
         name: Run backend tests
         entry: pytest backend
-        language: system
+        language: python
+        pass_filenames: false
+        additional_dependencies: [pytest]
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.48.0
+    hooks:
+      - id: eslint
+        name: ESLint JS
+        args: ["frontend/**/*.js"]
+        pass_filenames: false
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        name: Prettier JS + HTML
+        entry: npx prettier --write "frontend/**/*.{js,html}"
+        language: node
         pass_filenames: false
